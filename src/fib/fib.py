@@ -15,16 +15,16 @@ def fib(n):
             fibs.append(F(a))
     return fibs
 def run():
-    numberWanted = int(input("Stage of Fibs wanted"))
-    fibs = fib(numberWanted)
+    number_wanted = int(input("Stage of Fibs wanted"))
+    fibs = fib(number_wanted)
     print("F(0) = 0")
     a = 0
-    if numberWanted > 0:
-        while a < numberWanted:
+    if number_wanted > 0:
+        while a < number_wanted:
             a = a + 1
             print("F(" + str(a) + ") = " + str(fibs[a-1]))
-    elif numberWanted < 0:
-        while a > numberWanted:
+    elif number_wanted < 0:
+        while a > number_wanted:
             a = a - 1
             print("F(" + str(a) + ") = " + str(fibs[(-1 * a)-1]))
 
