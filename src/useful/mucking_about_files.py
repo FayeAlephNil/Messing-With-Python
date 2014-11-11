@@ -9,6 +9,7 @@ def run():
     a = 0
     if 0 < number_wanted < 1475:
         fibs = fib.fib(number_wanted)
+        print("F(0) = 0")
         fileout.write("F(0) = 0\n")
         while a < number_wanted:
             a += 1
@@ -16,6 +17,7 @@ def run():
             print("F(" + str(a) + ") = " + str(fibs[a-1]) + "")
     elif 0 > number_wanted > -1475:
         fibs = fib.fib(number_wanted)
+        print("F(0) = 0")
         fileout.write("F(0) = 0\n")
         while a > number_wanted:
             a -= 1
