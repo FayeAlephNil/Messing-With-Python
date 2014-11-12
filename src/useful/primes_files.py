@@ -1,48 +1,37 @@
-def check(n, primes):
-    count = 0
-    for num in primes:
-        if n % num != 0:
-            count += 1
-    return len(primes) == count
+from src.maths import primes
 
 
-def prime(n):
-    a = 2
-    primes = []
-    if n > 0:
-        primes = [2]
-        while len(primes) < n:
-            a += 1
-            if check(a, primes):
-                primes.append(a)
-    return primes
-
-
-def print_primes_easily(n):
+def write_primes_easily(n, file):
     a = 2
     if n > 0:
-        print("2")
-        primes = [2]
-        while len(primes) < n:
+        file.write("2\n")
+        primes_array = [2]
+        while len(primes_array) < n:
             a += 1
-            if check(a, primes):
-                primes.append(a)
-                print(a)
+            if primes.check(a, primes_array):
+                primes_array.append(a)
+                file.write(str(a) + "\n")
 
 
-def print_all():
-    primes = [2]
+def write_all(directory):
+    file = open(directory, "w")
+    primes_array = [2]
     a = 2
     print("2")
+    file.write("2\n")
     while 1:
         a += 1
-        if check(a, primes):
-            primes.append(a)
+        if primes.check(a, primes_array):
+            primes_array.append(a)
             print(a)
+            file.write(str(a) + "\n")
 
 
 def run():
-    all_or_some = input("Do you want to print all the primes or only a certain number?(all or some)")
+    directory = 'out/primes.txt'
+    fileout = open(directory, "w")
+    fileout.truncate(0)
+    all_or_some = input("Do you want to get all the primes or only a certain number?(all or some)")
     if all_or_some == "some":
         number_wanted = int(input("Number of Primes (must be positive and not equal to 0)"))
         way = input("Do you want to print primes successively or all at once (s or all)?")
@@ -53,22 +42,25 @@ def run():
                 run()
         else:
             if way == "all":
-                primes = prime(number_wanted)
-                for num in primes:
+                primes_array = primes.prime(number_wanted)
+                for num in primes_array:
                     print(num)
+                    fileout.write(str(num) + "\n")
             elif way == "s":
-                print_primes_easily(number_wanted)
+                primes.print_primes_easily(number_wanted)
+                write_primes_easily(number_wanted, fileout)
             else:
                 print("Try s or all next time")
                 yes_or_no = input("Try again? (yes or no) \n")
                 if yes_or_no == "yes":
                     run()
     elif all_or_some == "all":
-        print_all()
+        write_all(directory)
     else:
         print("You can only enter all or some!")
         yes_or_no = input("Try again? (yes or no) \n")
         if yes_or_no == "yes":
             run()
+
 if __name__ == "__main__":
     run()
